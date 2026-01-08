@@ -122,7 +122,6 @@ button {
     font-size: 12px;
     font-weight: bold;
     padding: 10px 45px;
-    /* Reduced padding */
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: transform 80ms ease-in, background-color 0.3s;
@@ -153,7 +152,6 @@ form {
     justify-content: center;
     flex-direction: column;
     padding: 0 30px;
-    /* Reduced side padding */
     height: 100%;
     text-align: center;
 }
@@ -162,9 +160,7 @@ input {
     background-color: var(--input-bg);
     border: 1px solid var(--glass-border);
     padding: 10px 15px;
-    /* Slightly reduced padding */
     margin: 4px 0;
-    /* Reduced margin */
     width: 100%;
     border-radius: 8px;
     color: var(--text-white);
@@ -183,7 +179,6 @@ input:focus {
     border-radius: 12px;
     display: flex;
     margin: 10px 0;
-    /* Reduced margin */
     border: 1px solid var(--glass-border);
     width: 100%;
     max-width: 250px;
@@ -232,7 +227,6 @@ input:focus {
 
 form button {
     margin-top: 20px;
-    /* Increased spacing as requested */
 }
 
 /* Container */
@@ -386,6 +380,6 @@ form button {
     max-height: 0;
     margin: 0;
     padding: 0 15px;
-    /* Keep side padding or remove? Better to scale y */
+   
     border: none;
 }

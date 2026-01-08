@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JobPortal - Authentication</title>
-    <!-- Google Fonts: Outfit for a modern look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -28,13 +27,13 @@
                     <button type="button" class="toggle-btn active" data-type="seeker">Candidate</button>
                     <button type="button" class="toggle-btn" data-type="employer">Employer</button>
                 </div>
-                <!-- Social Container could go here -->
+                <!-- Social Container -->
 
-                <input type="text" placeholder="Full Name" />
-                <input type="text" placeholder="Company Name" class="company-field collapsed" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <button type="submit">Sign Up</button>
+                <input type="text" placeholder="Full Name" id="signUpName" />
+                <input type="text" placeholder="Company Name" class="company-field collapsed" id="signUpCompany" />
+                <input type="email" placeholder="Email" id="signUpEmail" />
+                <input type="password" placeholder="Password" id="signUpPassword" />
+                <button type="submit" id="signUpSubmit">Sign Up</button>
             </form>
         </div>
 
@@ -47,10 +46,10 @@
                     <button type="button" class="toggle-btn" data-type="employer">Employer</button>
                 </div>
 
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input type="email" placeholder="Email" id="signInEmail" />
+                <input type="password" placeholder="Password" id="signInPassword" />
                 <a href="#">Forgot your password?</a>
-                <button type="submit">Sign In</button>
+                <button type="submit" id="signInSubmit">Sign In</button>
             </form>
         </div>
 
@@ -71,7 +70,7 @@
         </div>
     </div>
 
-    <script src="main.js"></script>
+    <script type="module" src="main.js"></script>
 </body>
 
 </html>

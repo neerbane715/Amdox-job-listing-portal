@@ -5,8 +5,27 @@ const userTypeBtns = document.querySelectorAll('.toggle-btn');
 const companyFields = document.querySelectorAll('.company-field');
 
 // Firebase Imports
-import { auth } from './firebase-config.js';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { auth, db } from './firebase-config.js';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+// Toast Helper
+// Toast Helper
+const showToast = (message, type = "success") => {
+    if (typeof Toastify === 'undefined') {
+        console.warn("Toastify not loaded. Fallback to alert:", message);
+        alert(message);
+        return;
+    }
+    Toastify({
+        text: message,
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: type === "success" ? "linear-gradient(to right, #00b09b, #96c93d)" : "linear-gradient(to right, #ff5f6d, #ffc371)",
+        stopOnFocus: true,
+    }).showToast();
+};
 
 // Sliding Panel Logic
 signUpButton.addEventListener('click', () => {
@@ -54,7 +73,7 @@ signUpSubmit.addEventListener('click', async (e) => {
     const company = document.getElementById('signUpCompany').value;
 
     if (!email || !password || !name) {
-        alert("Please fill in all required fields.");
+        showToast("Please fill in all required fields.", "error");
         return;
     }
 
@@ -67,13 +86,24 @@ signUpSubmit.addEventListener('click', async (e) => {
             displayName: name
         });
 
-        alert(`Account created successfully for ${name}!`);
-        window.location.href = "home.html";
+        // Store user role in Firestore
+        await setDoc(doc(db, "users", user.uid), {
+            name: name,
+            email: email,
+            userType: currentUserType,
+            company: currentUserType === 'employer' ? company : null,
+            createdAt: new Date().toISOString()
+        });
+
+        showToast(`Account created successfully for ${name}! Redirecting...`, "success");
+        setTimeout(() => {
+            window.location.href = "home.html";
+        }, 1500);
 
     } catch (error) {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(`Error: ${errorMessage}`);
+        showToast(`Error: ${errorMessage}`, "error");
         console.error("Sign Up Error:", errorCode, errorMessage);
     }
 });
@@ -86,19 +116,39 @@ signInSubmit.addEventListener('click', async (e) => {
     const password = document.getElementById('signInPassword').value;
 
     if (!email || !password) {
-        alert("Please enter email and password.");
+        showToast("Please enter email and password.", "error");
         return;
     }
 
     try {
-        await signInWithEmailAndPassword(auth, email, password);
-        // Alert is optional here, usually just redirect
-        // alert("Signed in successfully!"); 
-        window.location.href = "home.html";
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Verify User Role
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const userData = docSnap.data();
+            if (userData.userType !== currentUserType) {
+                await signOut(auth);
+                showToast(`Access Denied: You are registered as a ${userData.userType}, not a ${currentUserType}.`, "error");
+                return;
+            }
+            // Success
+            showToast("Signed in successfully! Redirecting...", "success");
+            setTimeout(() => {
+                window.location.href = "home.html";
+            }, 1000);
+        } else {
+            // Handle case where user exists in Auth but not Firestore (optional: create doc or deny)
+            console.error("No such user document!");
+            showToast("Error: User profile data missing.", "error");
+        }
     } catch (error) {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(`Error: ${errorMessage}`);
+        showToast(`Error: ${errorMessage}`, "error");
         console.error("Sign In Error:", errorCode, errorMessage);
     }
 });

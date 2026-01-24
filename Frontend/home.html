@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css?v=2">
 </head>
 
 <body>
@@ -22,13 +23,118 @@
         <h1>Welcome Back!</h1>
         <p id="userEmail">Loading user data...</p>
 
-        <div class="content ">
+        <div class="content">
             <p>You have successfully logged in to the portal.</p>
+        </div>
+
+        <div id="profileSection" class="profile-section" style="display: none;">
+            <h2>Your Profile</h2>
+
+            <!-- Candidate Form -->
+            <form id="candidateForm" class="profile-form" style="display: none;">
+                <div class="form-group">
+                    <input type="text" id="candName" placeholder="Full Name" required />
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="candPhone" placeholder="Phone Number" />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="candSkills" placeholder="Skills (e.g. Java, React, Python)" />
+                </div>
+                <div class="form-group">
+                    <select id="candExperience" class="input-style">
+                        <option value="" disabled selected>Experience Level</option>
+                        <option value="Entry">Entry Level</option>
+                        <option value="Mid">Mid Level</option>
+                        <option value="Senior">Senior Level</option>
+                    </select>
+                </div>
+                <div class="form-group file-upload">
+                    <label for="candResume" class="file-label">Upload Resume</label>
+                    <input type="file" id="candResume" accept=".pdf,.doc,.docx" />
+                    <span id="resumeFileName" class="file-name">No file chosen</span>
+                </div>
+                <button type="submit" id="saveCandBtn">Save Profile</button>
+            </form>
+
+            <!-- Employer Form -->
+            <form id="employerForm" class="profile-form" style="display: none;">
+                <div class="form-group">
+                    <input type="text" id="empCompanyName" placeholder="Company Name" required />
+                </div>
+                <div class="form-group">
+                    <input type="url" id="empWebsite" placeholder="Company Website (https://...)" />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="empIndustry" placeholder="Industry (e.g. Tech, Finance)" />
+                </div>
+                <div class="form-group">
+                    <textarea id="empDescription" placeholder="Company Description" class="input-style"
+                        rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="empContactPhone" placeholder="Contact Phone" />
+                </div>
+                <div class="form-group">
+                    <input type="email" id="empContactEmail" placeholder="Contact Email (for applicants)" />
+                </div>
+                <button type="submit" id="saveEmpBtn">Save Profile</button>
+            </form>
+        </div>
+
+        <!-- Employer Job Dashboard -->
+        <div id="employerDashboard" class="dashboard-section" style="display: none;">
+            <div class="dashboard-header">
+                <h2>Manage Jobs</h2>
+                <button id="postJobBtn" class="action-btn">Post a Job</button>
+            </div>
+
+            <div id="jobList" class="job-list">
+                <!-- Jobs will be populated here dynamically -->
+                <p class="no-jobs">No jobs posted yet.</p>
+            </div>
+        </div>
+
+        <!-- Job Form Modal (Hidden by default, used for Create and Edit) -->
+        <div id="jobFormModal" class="dashboard-section"
+            style="display: none; border-top: 1px solid var(--glass-border); margin-top: 20px; padding-top: 20px;">
+            <div class="dashboard-header">
+                <h2 id="jobFormTitle">Post a New Job</h2>
+                <button id="cancelJobBtn" class="action-btn"
+                    style="background-color: transparent; border: 1px solid #ef4444; color: #ef4444; width: auto; padding: 5px 15px;">Cancel</button>
+            </div>
+
+            <form id="jobForm" class="profile-form">
+                <input type="hidden" id="jobId">
+                <div class="form-group">
+                    <input type="text" id="jobTitle" placeholder="Job Title" required />
+                </div>
+                <div class="form-group">
+                    <textarea id="jobDescription" placeholder="Job Description" class="input-style" rows="4"
+                        required></textarea>
+                </div>
+                <div class="form-group">
+                    <textarea id="jobQualifications" placeholder="Qualifications" class="input-style"
+                        rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <textarea id="jobResponsibilities" placeholder="Responsibilities" class="input-style"
+                        rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="jobLocation" placeholder="Location (e.g. Remote, New York)" required />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="jobSalary" placeholder="Salary Range (e.g. ₹5LPA - ₹10LPA)" />
+                </div>
+                <button type="submit" id="saveJobBtn">Publish Job</button>
+            </form>
         </div>
 
         <button id="logoutBtn">Log Out</button>
     </div>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js?v=2"></script>
     <script type="module" src="home.js"></script>
 </body>
 

@@ -3,7 +3,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
 
-// Your web app's Firebase configuration
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+//Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyAPPOxZm7nOtCET1fc-QOOYZp1mxMT5Wp8",
     authDomain: "amdox-portal.firebaseapp.com",
@@ -14,9 +16,13 @@ const firebaseConfig = {
     measurementId: "G-7BGN7JZR8S"
 };
 
+import { getStorage } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const analytics = getAnalytics(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
 
-export { app, auth, analytics };
+export { app, auth, analytics, db, storage };

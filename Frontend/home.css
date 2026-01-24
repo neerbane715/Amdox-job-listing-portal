@@ -6,6 +6,7 @@
     --text-gray: #e1e6ec;
     --glass-bg: rgba(30, 41, 59, 0.7);
     --glass-border: rgba(255, 255, 255, 0.1);
+    --input-bg: rgba(15, 23, 42, 0.6);
     --transition: 0.6s ease-in-out;
 }
 
@@ -22,14 +23,18 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    /* Allow scroll if needed */
+    overflow-y: auto;
+    /* Enable vertical scroll */
     color: var(--text-white);
+    padding: 20px 0;
 }
 
-/* Background Blobs - Copied for consistency */
+/* Background Blobs */
 .background-blobs {
-    position: absolute;
+    position: fixed;
+    /* Fixed to stay in background */
     top: 0;
     left: 0;
     width: 100%;
@@ -87,23 +92,98 @@ body {
     backdrop-filter: blur(20px);
     border-radius: 20px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
-    padding: 50px;
+    padding: 40px;
     text-align: center;
     border: 1px solid var(--glass-border);
-    width: 500px;
+    width: 600px;
+    /* Slightly wider for forms */
     max-width: 90%;
+    margin-top: 20px;
 }
 
 h1 {
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    color: var(--text-white);
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin: 20px 0;
     color: var(--text-white);
 }
 
 p {
     color: var(--text-gray);
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-size: 16px;
+}
+
+/* Form Styles */
+.profile-section {
+    width: 100%;
+    text-align: left;
+    margin-top: 20px;
+    border-top: 1px solid var(--glass-border);
+    padding-top: 20px;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    width: 100%;
+}
+
+input,
+select,
+textarea {
+    background-color: var(--input-bg);
+    border: 1px solid var(--glass-border);
+    padding: 12px 15px;
+    width: 100%;
+    border-radius: 8px;
+    color: var(--text-white);
+    outline: none;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary-color);
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* File Upload Style */
+.file-upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-input-wrapper input[type="file"] {
+    display: none;
+    /* Hide default input */
+}
+
+input[type="file"] {
+    font-size: 12px;
+    padding: 8px;
+}
+
+.file-name {
+    font-size: 12px;
+    color: var(--text-gray);
+    font-style: italic;
 }
 
 button {
@@ -118,17 +198,216 @@ button {
     text-transform: uppercase;
     transition: transform 80ms ease-in, background-color 0.3s;
     cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    /* Full width button in form */
 }
 
 button:active {
-    transform: scale(0.95);
-}
-
-button:focus {
-    outline: none;
+    transform: scale(0.98);
 }
 
 button:hover {
     background-color: #258f58;
-    /* Slightly darker */
+}
+
+/* Specific logout button style to differentiate */
+#logoutBtn {
+    background-color: transparent;
+    border-color: #ef4444;
+    /* Red border */
+    color: #ef4444;
+    margin-top: 30px;
+    width: auto;
+    padding: 8px 30px;
+    font-size: 12px;
+}
+
+#logoutBtn:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+}/* Dashboard Styles */
+.dashboard-section {
+    width: 100%;
+    text-align: left;
+    margin-top: 20px;
+    border-top: 1px solid var(--glass-border);
+    padding-top: 20px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.action-btn {
+    width: auto;
+    padding: 8px 20px;
+    margin: 0;
+    font-size: 13px;
+}
+
+.job-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.job-card {
+    background-color: var(--input-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 15px;
+    transition: 0.3s;
+}
+
+.job-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.job-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-white);
+    margin-bottom: 5px;
+}
+
+.job-company {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.job-details {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    margin-bottom: 15px;
+    display: flex;
+    gap: 15px;
+}
+
+.job-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.btn-small {
+    padding: 5px 15px;
+    font-size: 11px;
+    width: auto;
+}
+
+.btn-edit {
+    background-color: transparent;
+    border-color: #facc15;
+    /* Yellow */
+    color: #facc15;
+}
+
+.btn-edit:hover {
+    background-color: rgba(250, 204, 21, 0.1);
+}
+
+.btn-delete {
+    background-color: transparent;
+    border-color: #ef4444;
+    /* Red */
+    color: #ef4444;
+}
+
+.btn-delete:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.no-jobs {
+    text-align: center;
+    color: var(--text-gray);
+    font-style: italic;
+    padding: 20px;
+}
+.job-card {
+    background-color: var(--input-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.job-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+}
+
+.job-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--text-white);
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+.job-company {
+    color: var(--primary-color);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.job-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.detail-item {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.detail-item .icon {
+    font-size: 1rem;
+}
+
+.job-desc {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    line-height: 1.5;
+}
+
+.job-actions {
+    display: flex;
+    gap: 8px;
 }

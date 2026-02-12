@@ -5,7 +5,7 @@ const userTypeBtns = document.querySelectorAll('.toggle-btn');
 const companyFields = document.querySelectorAll('.company-field');
 
 // Firebase Imports
-import { auth, db } from './firebase-config.js';
+import { auth, db } from '../Backend/firebase-config.js';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
@@ -151,4 +151,23 @@ signInSubmit.addEventListener('click', async (e) => {
         showToast(`Error: ${errorMessage}`, "error");
         console.error("Sign In Error:", errorCode, errorMessage);
     }
+});
+
+// Password Toggle Functionality
+const passwordToggles = document.querySelectorAll('.toggle-password');
+
+passwordToggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+        const targetId = toggle.getAttribute('data-target');
+        const passwordInput = document.getElementById(targetId);
+        const eyeIcon = toggle.querySelector('.eye-icon');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            eyeIcon.textContent = '👁‍🗨'; // Eye with speech bubble (visible)
+        } else {
+            passwordInput.type = 'password';
+            eyeIcon.textContent = '👁'; // Normal eye (hidden)
+        }
+    });
 });

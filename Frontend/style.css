@@ -380,6 +380,57 @@ form button {
     max-height: 0;
     margin: 0;
     padding: 0 15px;
-   
+
     border: none;
+}
+
+/* Password Toggle */
+.password-input-container {
+    position: relative;
+    width: 100%;
+    margin: 4px 0;
+}
+
+.password-input-container input {
+    padding-right: 45px;
+    margin: 0;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s;
+    margin: 0;
+    min-width: auto;
+}
+
+.toggle-password:hover {
+    opacity: 0.7;
+}
+
+.eye-icon {
+    font-size: 18px;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.3s;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.toggle-password:hover .eye-icon {
+    opacity: 1;
+    filter: grayscale(0%);
 }

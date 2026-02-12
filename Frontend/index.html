@@ -33,7 +33,12 @@
                 <input type="text" placeholder="Full Name" id="signUpName" />
                 <input type="text" placeholder="Company Name" class="company-field collapsed" id="signUpCompany" />
                 <input type="email" placeholder="Email" id="signUpEmail" />
-                <input type="password" placeholder="Password" id="signUpPassword" />
+                <div class="password-input-container">
+                    <input type="password" placeholder="Password" id="signUpPassword" />
+                    <button type="button" class="toggle-password" data-target="signUpPassword">
+                        <span class="eye-icon">👁</span>
+                    </button>
+                </div>
                 <button type="submit" id="signUpSubmit">Sign Up</button>
             </form>
         </div>
@@ -48,8 +53,12 @@
                 </div>
 
                 <input type="email" placeholder="Email" id="signInEmail" />
-                <input type="password" placeholder="Password" id="signInPassword" />
-                <a href="#">Forgot your password?</a>
+                <div class="password-input-container">
+                    <input type="password" placeholder="Password" id="signInPassword" />
+                    <button type="button" class="toggle-password" data-target="signInPassword">
+                        <span class="eye-icon">👁</span>
+                    </button>
+                </div>
                 <button type="submit" id="signInSubmit">Sign In</button>
             </form>
         </div>

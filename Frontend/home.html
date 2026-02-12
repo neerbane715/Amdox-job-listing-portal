@@ -19,120 +19,212 @@
         <div class="blob blob-3"></div>
     </div>
 
-    <div class="container">
-        <h1>Welcome Back!</h1>
-        <p id="userEmail">Loading user data...</p>
-
-        <div class="content">
-            <p>You have successfully logged in to the portal.</p>
-        </div>
-
-        <div id="profileSection" class="profile-section" style="display: none;">
-            <h2>Your Profile</h2>
-
-            <!-- Candidate Form -->
-            <form id="candidateForm" class="profile-form" style="display: none;">
-                <div class="form-group">
-                    <input type="text" id="candName" placeholder="Full Name" required />
+    <div class="app-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <div class="logo-icon">🌍</div>
+                    <span class="logo-text">Job Portal</span>
                 </div>
-                <div class="form-group">
-                    <input type="tel" id="candPhone" placeholder="Phone Number" />
-                </div>
-                <div class="form-group">
-                    <input type="text" id="candSkills" placeholder="Skills (e.g. Java, React, Python)" />
-                </div>
-                <div class="form-group">
-                    <select id="candExperience" class="input-style">
-                        <option value="" disabled selected>Experience Level</option>
-                        <option value="Entry">Entry Level</option>
-                        <option value="Mid">Mid Level</option>
-                        <option value="Senior">Senior Level</option>
-                    </select>
-                </div>
-                <div class="form-group file-upload">
-                    <label for="candResume" class="file-label">Upload Resume</label>
-                    <input type="file" id="candResume" accept=".pdf,.doc,.docx" />
-                    <span id="resumeFileName" class="file-name">No file chosen</span>
-                </div>
-                <button type="submit" id="saveCandBtn">Save Profile</button>
-            </form>
-
-            <!-- Employer Form -->
-            <form id="employerForm" class="profile-form" style="display: none;">
-                <div class="form-group">
-                    <input type="text" id="empCompanyName" placeholder="Company Name" required />
-                </div>
-                <div class="form-group">
-                    <input type="url" id="empWebsite" placeholder="Company Website (https://...)" />
-                </div>
-                <div class="form-group">
-                    <input type="text" id="empIndustry" placeholder="Industry (e.g. Tech, Finance)" />
-                </div>
-                <div class="form-group">
-                    <textarea id="empDescription" placeholder="Company Description" class="input-style"
-                        rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                    <input type="tel" id="empContactPhone" placeholder="Contact Phone" />
-                </div>
-                <div class="form-group">
-                    <input type="email" id="empContactEmail" placeholder="Contact Email (for applicants)" />
-                </div>
-                <button type="submit" id="saveEmpBtn">Save Profile</button>
-            </form>
-        </div>
-
-        <!-- Employer Job Dashboard -->
-        <div id="employerDashboard" class="dashboard-section" style="display: none;">
-            <div class="dashboard-header">
-                <h2>Manage Jobs</h2>
-                <button id="postJobBtn" class="action-btn">Post a Job</button>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <span class="toggle-icon">☰</span>
+                </button>
             </div>
 
-            <div id="jobList" class="job-list">
-                <!-- Jobs will be populated here dynamically -->
-                <p class="no-jobs">No jobs posted yet.</p>
+            <nav class="sidebar-nav" id="sidebarNav">
+                <!-- Navigation items will be populated dynamically based on user type -->
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <span class="nav-text">Dashboard</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="top-bar-left">
+                    <h1 class="page-title">Job Portal</h1>
+                </div>
+
+                <div class="top-bar-center">
+                    <nav class="top-tabs" id="topTabs">
+                        <!-- Tabs will be populated dynamically -->
+                    </nav>
+                </div>
+
+                <div class="top-bar-right">
+                    <div class="user-profile-container">
+                        <button class="user-info" id="userProfileBtn">
+                            <span id="userNameDisplay" class="user-name">test1</span>
+                            <span class="user-avatar">👤</span>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="dropdown-header">
+                                <div class="dropdown-avatar">👤</div>
+                                <div class="dropdown-user-info">
+                                    <div class="dropdown-name" id="dropdownUserName">test1</div>
+                                    <div class="dropdown-email" id="dropdownUserEmail">user@example.com</div>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-logout-btn" id="dropdownLogoutBtn">
+                                <span class="logout-icon">↗</span>
+                                <span>Log out</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <h2 class="welcome-title">Welcome back, <span id="userName">test1</span> 👋</h2>
+                <p class="welcome-subtitle">You have successfully logged in to the portal.</p>
+            </section>
+
+            <!-- Content Tabs Navigation -->
+            <div class="content-tabs" id="contentTabs">
+                <!-- Content tabs will be populated dynamically -->
             </div>
-        </div>
 
-        <!-- Job Form Modal (Hidden by default, used for Create and Edit) -->
-        <div id="jobFormModal" class="dashboard-section"
-            style="display: none; border-top: 1px solid var(--glass-border); margin-top: 20px; padding-top: 20px;">
-            <div class="dashboard-header">
-                <h2 id="jobFormTitle">Post a New Job</h2>
-                <button id="cancelJobBtn" class="action-btn"
-                    style="background-color: transparent; border: 1px solid #ef4444; color: #ef4444; width: auto; padding: 5px 15px;">Cancel</button>
+            <!-- Main Content Container -->
+            <div class="content-container">
+
+                <!-- Browse Jobs Section -->
+                <div id="browseJobsSection" class="content-section active">
+                    <!-- Search Container -->
+                    <div class="search-container">
+                        <div class="search-wrapper">
+                            <input type="text" id="searchKeyword" placeholder="🔍 Job Title, Keywords..."
+                                class="search-input">
+                            <select id="searchLocation" class="search-select">
+                                <option value="">📍 Location</option>
+                                <option value="Remote">Remote</option>
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Bangalore">Bangalore</option>
+                                <option value="Hyderabad">Hyderabad</option>
+                                <option value="Pune">Pune</option>
+                            </select>
+                            <select id="searchJobType" class="search-select">
+                                <option value="">💼 Job Type</option>
+                                <option value="Full-time">Full-time</option>
+                                <option value="Part-time">Part-time</option>
+                                <option value="Contract">Contract</option>
+                                <option value="Internship">Internship</option>
+                            </select>
+                            <button id="searchBtn" class="search-btn">SEARCH</button>
+                        </div>
+                    </div>
+
+                    <!-- Job Listings -->
+                    <div id="candidateJobList" class="job-listings">
+                        <!-- Jobs will be populated here dynamically -->
+                    </div>
+                </div>
+
+                <!-- My Applications Section -->
+                <div id="myApplicationsSection" class="content-section" style="display: none;">
+                    <div id="myApplicationsList" class="job-listings">
+                        <p class="no-jobs">No applications yet. Start browsing jobs and apply!</p>
+                    </div>
+                </div>
+
+                <!-- Profile Section -->
+                <div id="profileSection" class="content-section" style="display: none;">
+                    <h2>Your Profile</h2>
+
+                    <!-- Candidate Form -->
+                    <form id="candidateForm" class="profile-form" style="display: none;">
+                        <div class="form-group">
+                            <label for="candName">Full Name:</label>
+                            <input type="text" id="candName" placeholder="Enter your full name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="candPhone">Phone Number:</label>
+                            <input type="tel" id="candPhone" placeholder="Enter your phone number" />
+                        </div>
+                        <div class="form-group">
+                            <label for="candSkills">Skills:</label>
+                            <input type="text" id="candSkills" placeholder="e.g., Java, React, Python" />
+                        </div>
+                        <div class="form-group">
+                            <label for="candExperience">Experience Level:</label>
+                            <select id="candExperience" class="input-style">
+                                <option value="" disabled selected>Select experience level</option>
+                                <option value="Entry">Entry Level</option>
+                                <option value="Mid">Mid Level</option>
+                                <option value="Senior">Senior Level</option>
+                            </select>
+                        </div>
+                        <div class="form-group file-upload">
+                            <label for="candResume">Upload Resume:</label>
+                            <input type="file" id="candResume" accept=".pdf,.doc,.docx" />
+                            <span id="resumeFileName" class="file-name">No file chosen</span>
+                        </div>
+                        <button type="submit" id="saveCandBtn">Save Profile</button>
+                    </form>
+
+                    <!-- Employer Form -->
+                    <form id="employerForm" class="profile-form" style="display: none;">
+                        <div class="form-group">
+                            <label for="empCompanyName">Company Name:</label>
+                            <input type="text" id="empCompanyName" placeholder="Enter company name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="empWebsite">Company Website:</label>
+                            <input type="url" id="empWebsite" placeholder="https://..." />
+                        </div>
+                        <div class="form-group">
+                            <label for="empIndustry">Industry:</label>
+                            <input type="text" id="empIndustry" placeholder="e.g., Tech, Finance" />
+                        </div>
+                        <div class="form-group">
+                            <label for="empDescription">Company Description:</label>
+                            <textarea id="empDescription" placeholder="Brief description of your company"
+                                class="input-style" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="empContactPhone">Contact Phone:</label>
+                            <input type="tel" id="empContactPhone" placeholder="Enter contact phone" />
+                        </div>
+                        <div class="form-group">
+                            <label for="empContactEmail">Contact Email:</label>
+                            <input type="email" id="empContactEmail" placeholder="Enter contact email for applicants" />
+                        </div>
+                        <button type="submit" id="saveEmpBtn">Save Profile</button>
+                    </form>
+                </div>
+
+                <!-- Employer Jobs Section -->
+                <div id="employerJobsSection" class="content-section" style="display: none;">
+                    <div class="employer-header">
+                        <h2>My Posted Jobs</h2>
+                        <button id="postJobBtn" class="action-btn">+ POST A JOB</button>
+                    </div>
+                    <div id="employerJobList" class="job-listings">
+                        <p class="no-jobs">No jobs posted yet. Click the button above to post your first job!</p>
+                    </div>
+                </div>
+
+                <!-- View Applicants Section -->
+                <div id="viewApplicantsSection" class="content-section" style="display: none;">
+                    <div id="applicantsListContainer" class="job-listings">
+                    </div>
+                </div>
+
             </div>
 
-            <form id="jobForm" class="profile-form">
-                <input type="hidden" id="jobId">
-                <div class="form-group">
-                    <input type="text" id="jobTitle" placeholder="Job Title" required />
-                </div>
-                <div class="form-group">
-                    <textarea id="jobDescription" placeholder="Job Description" class="input-style" rows="4"
-                        required></textarea>
-                </div>
-                <div class="form-group">
-                    <textarea id="jobQualifications" placeholder="Qualifications" class="input-style"
-                        rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                    <textarea id="jobResponsibilities" placeholder="Responsibilities" class="input-style"
-                        rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                    <input type="text" id="jobLocation" placeholder="Location (e.g. Remote, New York)" required />
-                </div>
-                <div class="form-group">
-                    <input type="text" id="jobSalary" placeholder="Salary Range (e.g. ₹5LPA - ₹10LPA)" />
-                </div>
-                <button type="submit" id="saveJobBtn">Publish Job</button>
-            </form>
-        </div>
+            <!-- Footer -->
+            <footer class="footer">
+                <p>Made with ❤️ by Nirban Das</p>
+            </footer>
 
-        <button id="logoutBtn">Log Out</button>
+        </main>
     </div>
+
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js?v=2"></script>
     <script type="module" src="home.js"></script>

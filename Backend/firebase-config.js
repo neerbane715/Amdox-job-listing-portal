@@ -16,8 +16,8 @@ const firebaseConfig = {
     measurementId: "G-7BGN7JZR8S"
 };
 
+// import { getStorage } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 import { getStorage } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);

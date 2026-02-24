@@ -7,7 +7,7 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase
 
 //Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAPPOxZm7nOtCET1fc-QOOYZp1mxMT5Wp8",
+    apiKey: "xxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxx",
     authDomain: "amdox-portal.firebaseapp.com",
     projectId: "amdox-portal",
     storageBucket: "amdox-portal.firebasestorage.app",
